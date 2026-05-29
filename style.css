@@ -1,10 +1,11 @@
 /* 1. THE VARIABLES (The Color Palette) */
+/* 1. THE VARIABLES (Clinical Minimalism) */
 :root {
-    --bg-color: #0f172a; /* Deep dark blue background */
-    --text-main: #f8fafc; /* Crisp white text */
-    --text-muted: #94a3b8; /* Grayish text for subtitles */
-    --accent-glow: #06b6d4; /* Vibrant Cyan */
-    --card-bg: #1e293b; /* Slightly lighter blue for project cards */
+    --bg-color: #e3f0ef; /* Soft, non-fatiguing off-white */
+    --card-bg: #ffffff; /* Pure white for structural contrast */
+    --text-main: #0f172a; /* Deep charcoal for high legibility */
+    --text-muted: #092d5e; /* Clean, secondary gray */
+    --accent-glow: #2563eb; /* Enterprise Blue - absolute trust and action */
 }
 
 /* 2. THE RESET (Cleaning the Canvas) */
@@ -34,7 +35,7 @@ body {
 
 #hero h1 {
     font-size: 4rem;
-    color: var(--accent-glow);
+    color: var(--text-main);
     margin-bottom: 10px;
 }
 
@@ -64,13 +65,14 @@ body {
     background-color: var(--card-bg);
     padding: 30px;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Prepares it for animation */
+    border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle dark border */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02); /* Flat, modern shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 /* 6. THE HOVER EFFECT (Simple Animation) */
 .project-card:hover {
-    transform: translateY(-10px); /* Lifts the card up */
-    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2); /* Adds a cyan glow */
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15); /* Blue tinted shadow */
     border-color: var(--accent-glow);
 }
