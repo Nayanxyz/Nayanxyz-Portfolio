@@ -1,0 +1,76 @@
+/* 1. THE VARIABLES (The Color Palette) */
+:root {
+    --bg-color: #0f172a; /* Deep dark blue background */
+    --text-main: #f8fafc; /* Crisp white text */
+    --text-muted: #94a3b8; /* Grayish text for subtitles */
+    --accent-glow: #06b6d4; /* Vibrant Cyan */
+    --card-bg: #1e293b; /* Slightly lighter blue for project cards */
+}
+
+/* 2. THE RESET (Cleaning the Canvas) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* 3. THE HERO SECTION (Flexbox) */
+#hero {
+    height: 100vh; /* Takes up 100% of the Viewport Height (the screen) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers vertically */
+    align-items: center; /* Centers horizontally */
+    text-align: center;
+    padding: 20px;
+}
+
+#hero h1 {
+    font-size: 4rem;
+    color: var(--accent-glow);
+    margin-bottom: 10px;
+}
+
+#hero h2 {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* 4. THE PROJECT GRID (CSS Grid) */
+#projects {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto; /* Centers the whole section on ultra-wide monitors */
+}
+
+#project-grid {
+    display: grid;
+    /* This is the magic line. It makes the grid responsive without media queries! */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+/* 5. THE PROJECT CARDS */
+.project-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Prepares it for animation */
+}
+
+/* 6. THE HOVER EFFECT (Simple Animation) */
+.project-card:hover {
+    transform: translateY(-10px); /* Lifts the card up */
+    box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2); /* Adds a cyan glow */
+    border-color: var(--accent-glow);
+}
