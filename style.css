@@ -119,3 +119,51 @@ body {
 .repo-link:hover {
     color: var(--accent-glow);
 }
+
+/* Base Button Styling */
+.tab-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative; /* Crucial for positioning the glowing dot */
+}
+
+/* The Hover Animation */
+.tab-btn:hover {
+    color: var(--text-main);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* THE ACTIVE STATE ANIMATION */
+/* When the button has the '.active' class, change its color and border */
+.tab-btn.active {
+    color: var(--text-main);
+    border-color: var(--text-main);
+    padding-left: 30px; /* Make room for the dot */
+}
+
+/* Engineer the Glowing Dot using CSS, not HTML */
+.tab-btn.active::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--accent-glow);
+    box-shadow: 0 0 8px var(--accent-glow);
+    animation: pulse 2s infinite; /* Optional: Make the dot throb */
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
