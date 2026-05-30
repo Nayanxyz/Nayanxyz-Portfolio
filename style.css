@@ -76,3 +76,36 @@ body {
     box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15); /* Blue tinted shadow */
     border-color: var(--accent-glow);
 }
+
+/* 7. DYNAMIC JAVASCRIPT ELEMENTS */
+.tech-stack {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tech-tag {
+    background-color: var(--bg-color); /* Matches the main background */
+    color: var(--accent-glow); /* Enterprise blue text */
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(37, 99, 235, 0.2); /* Slight blue border */
+}
+
+.repo-link {
+    display: inline-block;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+}
+
+.repo-link:hover {
+    color: var(--accent-glow);
+}
