@@ -121,23 +121,36 @@ async function runTypewriterSequence() {
 runTypewriterSequence();
 
 /* ==========================================
-   5. THE TAB SWITCHER (Button State Logic)
+   5. THE TAB SWITCHER & SLIDER ENGINE
    ========================================== */
-
-// 1. Find every button on the page with the class 'tab-btn'
 const tabButtons = document.querySelectorAll('.tab-btn');
+const sliderTrack = document.getElementById('slider-track');
 
-// 2. Attach a click listener to each one
-tabButtons.forEach(button => {
+// We use 'forEach' to loop through buttons. Notice we grab the 'index' (0, 1, or 2).
+tabButtons.forEach((button, index) => {
     button.addEventListener('click', function() {
         
-        // A. Strip the 'active' class from EVERY button
+        // 1. Reset active states
         tabButtons.forEach(btn => btn.classList.remove('active'));
-        
-        // B. Add the 'active' class ONLY to the exact button you just clicked
         this.classList.add('active');
         
-        // Note: This is where you will eventually add the logic to swap 
-        // the project cards out for education/certificates based on the tab.
+        // 2. The Slider Math
+        // If index is 0 (Projects), move track to 0%.
+        // If index is 1 (Education), move track to -33.333% (Left).
+        // If index is 2 (Certificates), move track to -66.666% (Left).
+        const slidePercentage = index * -33.333;
+        sliderTrack.style.transform = `translateX(${slidePercentage}%)`;
     });
 });
+
+/* ==========================================
+   6. HARDWARE-ACCELERATED SMOOTH SCROLL
+   ========================================== */
+const heroBtn = document.querySelector('.hero-btn');
+if (heroBtn) {
+    heroBtn.addEventListener('click', function(e) {
+        e.preventDefault(); // Stop the default instant jump
+        const targetSection = document.getElementById('projects');
+        targetSection.scrollIntoView({ behavior: 'smooth' }); // Native smooth scroll
+    });
+}
