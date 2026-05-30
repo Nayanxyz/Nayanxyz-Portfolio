@@ -1,156 +1,149 @@
-/* 1. THE DATA LAYER */
-const projectsData = [
-    {
-        title: "Algorithmic Trading Engine",
-        description: "High-frequency execution bot utilizing Fyers API for millisecond order routing and market data analysis.",
-        techStack: ["Python", "WebSockets", "Pandas"],
-        githubLink: "#"
-    },
-    {
-        title: "Campus Placement API",
-        description: "Decoupled backend architecture handling role-based access, concurrent user applications, and relational data.",
-        techStack: ["Flask", "PostgreSQL", "REST API"],
-        githubLink: "https://github.com/Nayanxyz/Nayanxyz-Portfolio.git"
-    },
-    {
-        title: "Headless Extraction Bot",
-        description: "Automated data pipeline utilizing Selenium to bypass basic bot-detection and scrape dynamic DOM elements.",
-        techStack: ["Python", "Selenium", "Data Automation"],
-        githubLink: "#"
-    }
-];
-
 /* ==========================================
-   2. THE RENDER ENGINE 
-   (This reads the data and builds the HTML)
+   1. THE ASYNC TYPEWRITER ENGINE
    ========================================== */
-
-// Step A: Find the empty container in the HTML
-const gridContainer = document.getElementById('project-grid');
-
-// Step B: Loop through every project in our database
-projectsData.forEach(project => {
-    
-    // Step C: Create the HTML for the tags (e.g., Python, Flask)
-    const techTagsHTML = project.techStack.map(tech => 
-        `<span class="tech-tag">${tech}</span>`
-    ).join('');
-
-    // Step D: Construct the actual card HTML using Template Literals
-    const cardHTML = `
-        <div class="project-card">
-            <h3>${project.title}</h3>
-            <p>${project.description}</p>
-            <div class="tech-stack">
-                ${techTagsHTML}
-            </div>
-            <a href="${project.githubLink}" target="_blank" class="repo-link">View Architecture &rarr;</a>
-        </div>
-    `;
-
-    // Step E: Inject the constructed card into the live webpage
-    gridContainer.innerHTML += cardHTML;
-});
-
-/* ==========================================
-   3. THE ANIMATION CONTROLLER (Intersection Observer)
-   ========================================== */
-
-// 1. Define the rules for the observer
-const observerOptions = {
-    root: null, // Use the browser viewport as the camera
-    threshold: 0.1, // Trigger when 10% of the card is visible
-    rootMargin: "0px 0px -50px 0px" // Trigger slightly before it hits the bottom
-};
-
-// 2. Create the observer machine
-const cardObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-        // If the card has entered the camera's view...
-        if (entry.isIntersecting) {
-            // Add the 'show' class to trigger the CSS animation
-            entry.target.classList.add('show');
-            // Stop watching this specific card once it has animated
-            observer.unobserve(entry.target); 
-        }
-    });
-}, observerOptions);
-
-// 3. Find all the cards and attach the observer to them
-// Note: We use setTimeout to ensure the DOM has finished painting the cards first.
-setTimeout(() => {
-    const cards = document.querySelectorAll('.project-card');
-    cards.forEach(card => {
-        cardObserver.observe(card);
-    });
-}, 100);
-
-/* ==========================================
-   4. THE ASYNC TYPEWRITER ENGINE
-   ========================================== */
-
-// 1. We build a utility function that returns a Promise. 
-// This acts as a mathematical delay in our execution thread.
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-// 2. The core typing function
 async function typeLine(elementId, text, speed) {
     const element = document.getElementById(elementId);
-    element.innerHTML = ""; // Clear it first
+    if (!element) return;
+    element.innerHTML = ""; 
     
-    // Loop through the string, add one character, then pause
     for (let i = 0; i < text.length; i++) {
         element.innerHTML += text.charAt(i);
         await sleep(speed);
     }
 }
 
-// 3. The Execution Sequence.
-// The 'await' keyword forces the system to finish Line 1 before starting Line 2.
 async function runTypewriterSequence() {
-    await typeLine("hero-line-1", "Hello everyone!", 30);
-    await sleep(100); // Brief pause between lines
-    
-    await typeLine("hero-line-2", "I am Nayan", 30);
-    await sleep(150);
-    
-    await typeLine("hero-terminal", "automating execution pipelines and engineering algorithmic systems.", 15);
+    try {
+        await typeLine("hero-line-1", "Hello everyone!", 30);
+        await sleep(100); 
+        await typeLine("hero-line-2", "I am Nayan", 30);
+        await sleep(150);
+        await typeLine("hero-terminal", "engineering automated systems and scalable web applications.", 15);
+    } catch (err) {
+        console.error("Typewriter error:", err);
+    }
 }
 
-// Trigger the sequence when the page loads
-runTypewriterSequence();
+/* ==========================================
+   2. THE ANIMATION CONTROLLER (Intersection Observer)
+   ========================================== */
+const observerOptions = {
+    threshold: 0.1, 
+    rootMargin: "0px 0px -50px 0px" 
+};
+
+const cardObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            observer.unobserve(entry.target); 
+        }
+    });
+}, observerOptions);
+
+// Function to observe static cards (like Education/Certificates)
+function observeStaticCards() {
+    const staticCards = document.querySelectorAll('.slider-panel .project-card');
+    staticCards.forEach(card => cardObserver.observe(card));
+}
 
 /* ==========================================
-   5. THE TAB SWITCHER & SLIDER ENGINE
+   3. THE GITHUB API INTEGRATION ENGINE
+   ========================================== */
+const gridContainer = document.getElementById('project-grid');
+
+async function fetchGitHubProjects() {
+    if (!gridContainer) return;
+    
+    try {
+        gridContainer.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Connecting to GitHub API...</p>';
+
+        const response = await fetch('https://api.github.com/users/Nayanxyz/repos?sort=updated&per_page=6');
+        
+        if (!response.ok) throw new Error(`GitHub API returned status: ${response.status}`);
+
+        const repos = await response.json();
+        
+        if (repos.length === 0) {
+            gridContainer.innerHTML = '<p style="color: var(--text-muted);">No public repositories found.</p>';
+            return;
+        }
+
+        // Build the HTML string efficiently
+        let htmlString = '';
+        repos.forEach(repo => {
+            const description = repo.description || "System architecture and codebase repository.";
+            const languageTag = repo.language ? `<span class="tech-tag">${repo.language}</span>` : '<span class="tech-tag">Logic</span>';
+
+            htmlString += `
+                <div class="project-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                        <h3 style="font-size: 1.2rem; font-weight: 600;">${repo.name.replace(/-/g, ' ')}</h3>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
+                        ${description}
+                    </p>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                        ${languageTag}
+                        <span class="tech-tag">Systems</span>
+                    </div>
+                    <a href="${repo.html_url}" target="_blank" class="repo-link">View Architecture &rarr;</a>
+                </div>
+            `;
+        });
+
+        // Inject the HTML
+        gridContainer.innerHTML = htmlString;
+
+        // CRITICAL: Now that the new cards exist in the DOM, tell the observer to animate them
+        const dynamicCards = gridContainer.querySelectorAll('.project-card');
+        dynamicCards.forEach(card => cardObserver.observe(card));
+
+    } catch (error) {
+        console.error("API Error:", error);
+        gridContainer.innerHTML = '<p style="color: #ef4444; text-align: center;">Failed to load live projects. Check console.</p>';
+    }
+}
+
+/* ==========================================
+   4. THE TAB SWITCHER & SLIDER ENGINE
    ========================================== */
 const tabButtons = document.querySelectorAll('.tab-btn');
 const sliderTrack = document.getElementById('slider-track');
 
-// We use 'forEach' to loop through buttons. Notice we grab the 'index' (0, 1, or 2).
 tabButtons.forEach((button, index) => {
     button.addEventListener('click', function() {
-        
-        // 1. Reset active states
         tabButtons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
         
-        // 2. The Slider Math
-        // If index is 0 (Projects), move track to 0%.
-        // If index is 1 (Education), move track to -33.333% (Left).
-        // If index is 2 (Certificates), move track to -66.666% (Left).
         const slidePercentage = index * -33.333;
-        sliderTrack.style.transform = `translateX(${slidePercentage}%)`;
+        if (sliderTrack) {
+            sliderTrack.style.transform = `translateX(${slidePercentage}%)`;
+        }
     });
 });
 
 /* ==========================================
-   6. HARDWARE-ACCELERATED SMOOTH SCROLL
+   5. HARDWARE-ACCELERATED SMOOTH SCROLL
    ========================================== */
 const heroBtn = document.querySelector('.hero-btn');
 if (heroBtn) {
     heroBtn.addEventListener('click', function(e) {
-        e.preventDefault(); // Stop the default instant jump
+        e.preventDefault(); 
         const targetSection = document.getElementById('projects');
-        targetSection.scrollIntoView({ behavior: 'smooth' }); // Native smooth scroll
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 }
+
+/* ==========================================
+   6. INITIALIZATION CONTROLLER
+   ========================================== */
+document.addEventListener("DOMContentLoaded", () => {
+    runTypewriterSequence();
+    fetchGitHubProjects();
+    observeStaticCards();
+});
