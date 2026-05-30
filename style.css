@@ -120,6 +120,15 @@ body {
     color: var(--accent-glow);
 }
 
+/* TAB NAVIGATION LAYOUT */
+.tab-navigation {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    justify-content: center; /* Centers the buttons */
+    flex-wrap: wrap; /* Allows them to stack on small mobile screens */
+}
+
 /* Base Button Styling */
 .tab-btn {
     background: transparent;
