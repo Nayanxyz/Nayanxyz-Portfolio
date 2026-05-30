@@ -55,8 +55,7 @@ function observeStaticCards() {
 const gridContainer = document.getElementById('project-grid');
 
 // ENGINEERING PATTERN: The Target Array
-// Type the exact names of your pinned GitHub repositories inside these quotes.
-// Example: "fyers-trading-bot", "ai-extraction-pipeline"
+
 const pinnedRepos = [
     "Swarm-API-Super-Agent-Travily", 
     "webcam-motion-alert", 
@@ -82,9 +81,15 @@ async function fetchGitHubProjects() {
         // Filter the incoming data against your target array
         let displayRepos = [];
         if (pinnedRepos.length > 0 && pinnedRepos[0] !== "repo-name-1") {
-            displayRepos = allRepos.filter(repo => pinnedRepos.includes(repo.name));
+            
+            
+            displayRepos = pinnedRepos
+                .map(targetName => allRepos.find(repo => repo.name === targetName))
+                // Safety catch: removes 'undefined' if you have a typo in your array
+                .filter(repo => repo !== undefined); 
+
         } else {
-            // Fallback: If you haven't updated the array yet, just show the latest 6
+            // Fallback: If array is empty, sort by most recently updated
             displayRepos = allRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 6);
         }
 
