@@ -84,3 +84,38 @@ setTimeout(() => {
         cardObserver.observe(card);
     });
 }, 100);
+
+/* ==========================================
+   4. THE ASYNC TYPEWRITER ENGINE
+   ========================================== */
+
+// 1. We build a utility function that returns a Promise. 
+// This acts as a mathematical delay in our execution thread.
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+// 2. The core typing function
+async function typeLine(elementId, text, speed) {
+    const element = document.getElementById(elementId);
+    element.innerHTML = ""; // Clear it first
+    
+    // Loop through the string, add one character, then pause
+    for (let i = 0; i < text.length; i++) {
+        element.innerHTML += text.charAt(i);
+        await sleep(speed);
+    }
+}
+
+// 3. The Execution Sequence.
+// The 'await' keyword forces the system to finish Line 1 before starting Line 2.
+async function runTypewriterSequence() {
+    await typeLine("hero-line-1", "Hello everyone!", 30);
+    await sleep(100); // Brief pause between lines
+    
+    await typeLine("hero-line-2", "I am Nayan", 30);
+    await sleep(150);
+    
+    await typeLine("hero-terminal", "automating execution pipelines and engineering algorithmic systems.", 15);
+}
+
+// Trigger the sequence when the page loads
+runTypewriterSequence();
