@@ -119,3 +119,25 @@ async function runTypewriterSequence() {
 
 // Trigger the sequence when the page loads
 runTypewriterSequence();
+
+/* ==========================================
+   5. THE TAB SWITCHER (Button State Logic)
+   ========================================== */
+
+// 1. Find every button on the page with the class 'tab-btn'
+const tabButtons = document.querySelectorAll('.tab-btn');
+
+// 2. Attach a click listener to each one
+tabButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        
+        // A. Strip the 'active' class from EVERY button
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // B. Add the 'active' class ONLY to the exact button you just clicked
+        this.classList.add('active');
+        
+        // Note: This is where you will eventually add the logic to swap 
+        // the project cards out for education/certificates based on the tab.
+    });
+});
