@@ -50,9 +50,21 @@ function observeStaticCards() {
 }
 
 /* ==========================================
-   3. THE GITHUB API INTEGRATION ENGINE
+   3. THE GITHUB API INTEGRATION ENGINE (Pinned & Live Links)
    ========================================== */
 const gridContainer = document.getElementById('project-grid');
+
+// ENGINEERING PATTERN: The Target Array
+// Type the exact names of your pinned GitHub repositories inside these quotes.
+// Example: "fyers-trading-bot", "ai-extraction-pipeline"
+const pinnedRepos = [
+    "Swarm-API-Super-Agent-Travily", 
+    "webcam-motion-alert", 
+    "Web-Automation-with-Selenium",
+    "Web_scrape_sql",
+    "Personality-Ai-Agent",
+    "Django-Application-form"
+];
 
 async function fetchGitHubProjects() {
     if (!gridContainer) return;
@@ -60,44 +72,59 @@ async function fetchGitHubProjects() {
     try {
         gridContainer.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Connecting to GitHub API...</p>';
 
-        const response = await fetch('https://api.github.com/users/Nayanxyz/repos?sort=updated&per_page=6');
+        // Fetch up to 100 repositories to ensure we capture all your pinned ones
+        const response = await fetch('https://api.github.com/users/Nayanxyz/repos?per_page=100');
         
         if (!response.ok) throw new Error(`GitHub API returned status: ${response.status}`);
 
-        const repos = await response.json();
+        const allRepos = await response.json();
         
-        if (repos.length === 0) {
-            gridContainer.innerHTML = '<p style="color: var(--text-muted);">No public repositories found.</p>';
+        // Filter the incoming data against your target array
+        let displayRepos = [];
+        if (pinnedRepos.length > 0 && pinnedRepos[0] !== "repo-name-1") {
+            displayRepos = allRepos.filter(repo => pinnedRepos.includes(repo.name));
+        } else {
+            // Fallback: If you haven't updated the array yet, just show the latest 6
+            displayRepos = allRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 6);
+        }
+
+        if (displayRepos.length === 0) {
+            gridContainer.innerHTML = '<p style="color: var(--text-muted);">No featured repositories found. Check your array names.</p>';
             return;
         }
 
-        // Build the HTML string efficiently
         let htmlString = '';
-        repos.forEach(repo => {
+        displayRepos.forEach(repo => {
             const description = repo.description || "System architecture and codebase repository.";
             const languageTag = repo.language ? `<span class="tech-tag">${repo.language}</span>` : '<span class="tech-tag">Logic</span>';
+            
+            // THE CONDITIONAL RENDER: If repo.homepage exists, build the link.
+            const liveLinkHTML = repo.homepage 
+                ? `<a href="${repo.homepage}" target="_blank" class="repo-link" style="color: var(--accent-glow); margin-right: 20px;">Live Webapp &nearr;</a>` 
+                : '';
 
             htmlString += `
-                <div class="project-card">
+                <div class="project-card" style="display: flex; flex-direction: column;">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
                         <h3 style="font-size: 1.2rem; font-weight: 600;">${repo.name.replace(/-/g, ' ')}</h3>
                     </div>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px;">
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
                         ${description}
                     </p>
-                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 25px;">
                         ${languageTag}
                         <span class="tech-tag">Systems</span>
                     </div>
-                    <a href="${repo.html_url}" target="_blank" class="repo-link">View Architecture &rarr;</a>
+                    <div style="display: flex; align-items: center; font-weight: 600; font-size: 0.9rem;">
+                        ${liveLinkHTML}
+                        <a href="${repo.html_url}" target="_blank" class="repo-link">View Architecture &rarr;</a>
+                    </div>
                 </div>
             `;
         });
 
-        // Inject the HTML
         gridContainer.innerHTML = htmlString;
 
-        // CRITICAL: Now that the new cards exist in the DOM, tell the observer to animate them
         const dynamicCards = gridContainer.querySelectorAll('.project-card');
         dynamicCards.forEach(card => cardObserver.observe(card));
 
