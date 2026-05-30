@@ -51,3 +51,36 @@ projectsData.forEach(project => {
     // Step E: Inject the constructed card into the live webpage
     gridContainer.innerHTML += cardHTML;
 });
+
+/* ==========================================
+   3. THE ANIMATION CONTROLLER (Intersection Observer)
+   ========================================== */
+
+// 1. Define the rules for the observer
+const observerOptions = {
+    root: null, // Use the browser viewport as the camera
+    threshold: 0.1, // Trigger when 10% of the card is visible
+    rootMargin: "0px 0px -50px 0px" // Trigger slightly before it hits the bottom
+};
+
+// 2. Create the observer machine
+const cardObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        // If the card has entered the camera's view...
+        if (entry.isIntersecting) {
+            // Add the 'show' class to trigger the CSS animation
+            entry.target.classList.add('show');
+            // Stop watching this specific card once it has animated
+            observer.unobserve(entry.target); 
+        }
+    });
+}, observerOptions);
+
+// 3. Find all the cards and attach the observer to them
+// Note: We use setTimeout to ensure the DOM has finished painting the cards first.
+setTimeout(() => {
+    const cards = document.querySelectorAll('.project-card');
+    cards.forEach(card => {
+        cardObserver.observe(card);
+    });
+}, 100);
