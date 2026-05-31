@@ -107,17 +107,54 @@ body {
     border: 1px solid rgba(37, 99, 235, 0.2); /* Slight blue border */
 }
 
+.scroll-indicator {
+  background: transparent;
+  border: none;
+  color: #260e0e; /* Note: If your page background is white, this will be invisible */
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  margin: 0 auto;
+}
+
+/* This replaces your clunky onMouseEnter/onMouseLeave JS logic */
+.scroll-indicator:hover {
+  opacity: 1;
+  transform: translateY(4px);
+}
+
+/* ==========================================
+   9. THE ARCHITECTURE ACTION BUTTON
+   ========================================== */
 .repo-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: transparent;
     color: var(--text-main);
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.9rem;
-    transition: color 0.2s ease;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--text-muted);
+    border-radius: 8px; /* Clean, modern structural curve */
+    
+    /* The physics of the interaction */
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* THE HOVER INVERSION (How premium UI behaves) */
 .repo-link:hover {
-    color: var(--accent-glow);
+    background-color: var(--text-main);
+    color: var(--card-bg); /* Inverts the text color */
+    border-color: var(--text-main);
+    transform: translateY(-3px); /* The physical lift */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* The depth shadow */
 }
 
 /* TAB NAVIGATION LAYOUT */
@@ -194,4 +231,41 @@ body {
 .slider-panel {
     width: 33.333%; /* Each panel takes up exactly 1/3 of the track */
     padding: 0 15px; /* Adds breathing room between panels */
+}
+
+/* ==========================================
+   10. CONTEXT-AWARE SCROLL HINT
+   ========================================== */
+.scroll-hint {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--text-main);
+    color: var(--card-bg);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    
+    /* State management */
+    opacity: 0;
+    pointer-events: none; /* Prevents it from blocking clicks */
+    transition: opacity 0.4s ease-out;
+}
+
+/* The active state toggled by JS */
+.scroll-hint.visible {
+    opacity: 1;
+    animation: gentle-bounce 2s infinite;
+}
+
+@keyframes gentle-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
 }
