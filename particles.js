@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Opacity fades as they get further apart
                     const opacity = 1 - (distance / maxDistance);
                     // Muted secondary blue/gray for connections
-                    ctx.strokeStyle = `rgba(9, 45, 94, ${opacity * 0.35})`; 
+                    ctx.strokeStyle = `rgba(230, 237, 243, ${opacity * 0.15})`; 
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
