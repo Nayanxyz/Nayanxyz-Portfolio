@@ -43,35 +43,15 @@ const cardObserver = new IntersectionObserver((entries, observer) => {
     });
 }, observerOptions);
 
-// Function to observe static cards (like Education/Certificates)
 function observeStaticCards() {
     const staticCards = document.querySelectorAll('.slider-panel .project-card');
+    if (staticCards.length === 0) return;
     staticCards.forEach(card => cardObserver.observe(card));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const scrollBtn = document.getElementById("scroll-down-btn");
-  const targetSection = document.getElementById("hub-section");
-
-  if (scrollBtn && targetSection) {
-    scrollBtn.addEventListener("click", () => {
-      targetSection.scrollIntoView({ 
-        behavior: "smooth", 
-        block: "start" 
-      });
-    });
-  } else {
-    console.error("Scroll button or target section is missing from the DOM.");
-  }
-});
-
 /* ==========================================
-   3. THE GITHUB API INTEGRATION ENGINE (Pinned & Live Links)
+   3. THE GITHUB API INTEGRATION ENGINE
    ========================================== */
-const gridContainer = document.getElementById('project-grid');
-
-// ENGINEERING PATTERN: The Target Array
-
 const pinnedRepos = [
     "Swarm-API-Super-Agent-Travily", 
     "webcam-motion-alert", 
@@ -82,30 +62,23 @@ const pinnedRepos = [
 ];
 
 async function fetchGitHubProjects() {
+    const gridContainer = document.getElementById('project-grid');
     if (!gridContainer) return;
     
     try {
         gridContainer.innerHTML = '<p style="color: var(--text-muted); text-align: center;">Connecting to GitHub API...</p>';
 
-        // Fetch up to 100 repositories to ensure we capture all your pinned ones
         const response = await fetch('https://api.github.com/users/Nayanxyz/repos?per_page=100');
-        
         if (!response.ok) throw new Error(`GitHub API returned status: ${response.status}`);
 
         const allRepos = await response.json();
         
-        // Filter the incoming data against your target array
         let displayRepos = [];
-        if (pinnedRepos.length > 0 && pinnedRepos[0] !== "repo-name-1") {
-            
-            
+        if (pinnedRepos.length > 0) {
             displayRepos = pinnedRepos
                 .map(targetName => allRepos.find(repo => repo.name === targetName))
-                // Safety catch: removes 'undefined' if you have a typo in your array
                 .filter(repo => repo !== undefined); 
-
         } else {
-            // Fallback: If array is empty, sort by most recently updated
             displayRepos = allRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at)).slice(0, 6);
         }
 
@@ -118,8 +91,6 @@ async function fetchGitHubProjects() {
         displayRepos.forEach(repo => {
             const description = repo.description || "System architecture and codebase repository.";
             const languageTag = repo.language ? `<span class="tech-tag">${repo.language}</span>` : '<span class="tech-tag">Logic</span>';
-            
-            // THE CONDITIONAL RENDER: If repo.homepage exists, build the link.
             const liveLinkHTML = repo.homepage 
                 ? `<a href="${repo.homepage}" target="_blank" class="repo-link" style="color: var(--accent-glow); margin-right: 20px;">Live Webapp &nearr;</a>` 
                 : '';
@@ -146,6 +117,7 @@ async function fetchGitHubProjects() {
 
         gridContainer.innerHTML = htmlString;
 
+        // Apply animations to newly injected cards
         const dynamicCards = gridContainer.querySelectorAll('.project-card');
         dynamicCards.forEach(card => cardObserver.observe(card));
 
@@ -158,29 +130,29 @@ async function fetchGitHubProjects() {
 /* ==========================================
    4. THE TAB SWITCHER & SLIDER ENGINE
    ========================================== */
-const tabButtons = document.querySelectorAll('.tab-btn');
-const sliderTrack = document.getElementById('slider-track');
+function initTabSlider() {
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const sliderTrack = document.getElementById('slider-track');
+    
+    if (tabButtons.length === 0 || !sliderTrack) return;
 
-tabButtons.forEach((button, index) => {
-    button.addEventListener('click', function() {
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        
-        const slidePercentage = index * -33.333;
-        if (sliderTrack) {
+    tabButtons.forEach((button, index) => {
+        button.addEventListener('click', function() {
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            const slidePercentage = index * -33.333;
             sliderTrack.style.transform = `translateX(${slidePercentage}%)`;
-        }
+        });
     });
-});
-
-
+}
 
 /* ==========================================
-   6. INITIALIZATION CONTROLLER
+   5. HARDWARE-ACCELERATED SMOOTH SCROLL
    ========================================== */
 function initScrollEngine() {
     const scrollBtn = document.getElementById("scroll-down-btn");
-    const targetSection = document.getElementById("projects"); // Pointing to the real section
+    const targetSection = document.getElementById("projects"); 
 
     if (scrollBtn && targetSection) {
         scrollBtn.addEventListener("click", () => {
@@ -189,15 +161,54 @@ function initScrollEngine() {
                 block: "start" 
             });
         });
-    } else {
-        console.warn("System routing: Scroll anchors missing from DOM.");
     }
 }
 
+/* ==========================================
+   6. DYNAMIC SCROLL HINT ENGINE
+   ========================================== */
+function initScrollHint() {
+    const scrollHint = document.getElementById('scroll-hint');
+    const heroSection = document.getElementById('hero');
+    const bottomAnchor = document.getElementById('projects-bottom-anchor');
+
+    if (!scrollHint || !heroSection || !bottomAnchor) return;
+
+    const bottomObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                scrollHint.classList.remove('visible');
+            } else if (heroSection.getBoundingClientRect().bottom < 0) {
+                scrollHint.classList.add('visible');
+            }
+        });
+    }, { threshold: 0 });
+
+    const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                if (bottomAnchor.getBoundingClientRect().top > window.innerHeight) {
+                    scrollHint.classList.add('visible');
+                }
+            } else {
+                scrollHint.classList.remove('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    bottomObserver.observe(bottomAnchor);
+    heroObserver.observe(heroSection);
+}
+
+/* ==========================================
+   7. INITIALIZATION CONTROLLER
+   ========================================== */
+// This is the ignition switch. It MUST stay at the very bottom.
 document.addEventListener("DOMContentLoaded", () => {
-    // Single point of entry for the entire application
     runTypewriterSequence();
     fetchGitHubProjects();
     observeStaticCards();
-    initScrollEngine(); // Added the scroll engine here
-});;
+    initTabSlider();
+    initScrollEngine(); 
+    initScrollHint(); 
+});
