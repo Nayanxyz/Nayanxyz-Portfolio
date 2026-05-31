@@ -49,6 +49,22 @@ function observeStaticCards() {
     staticCards.forEach(card => cardObserver.observe(card));
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollBtn = document.getElementById("scroll-down-btn");
+  const targetSection = document.getElementById("hub-section");
+
+  if (scrollBtn && targetSection) {
+    scrollBtn.addEventListener("click", () => {
+      targetSection.scrollIntoView({ 
+        behavior: "smooth", 
+        block: "start" 
+      });
+    });
+  } else {
+    console.error("Scroll button or target section is missing from the DOM.");
+  }
+});
+
 /* ==========================================
    3. THE GITHUB API INTEGRATION ENGINE (Pinned & Live Links)
    ========================================== */
@@ -157,25 +173,31 @@ tabButtons.forEach((button, index) => {
     });
 });
 
-/* ==========================================
-   5. HARDWARE-ACCELERATED SMOOTH SCROLL
-   ========================================== */
-const heroBtn = document.querySelector('.hero-btn');
-if (heroBtn) {
-    heroBtn.addEventListener('click', function(e) {
-        e.preventDefault(); 
-        const targetSection = document.getElementById('projects');
-        if (targetSection) {
-            targetSection.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-}
+
 
 /* ==========================================
    6. INITIALIZATION CONTROLLER
    ========================================== */
+function initScrollEngine() {
+    const scrollBtn = document.getElementById("scroll-down-btn");
+    const targetSection = document.getElementById("projects"); // Pointing to the real section
+
+    if (scrollBtn && targetSection) {
+        scrollBtn.addEventListener("click", () => {
+            targetSection.scrollIntoView({ 
+                behavior: "smooth", 
+                block: "start" 
+            });
+        });
+    } else {
+        console.warn("System routing: Scroll anchors missing from DOM.");
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+    // Single point of entry for the entire application
     runTypewriterSequence();
     fetchGitHubProjects();
     observeStaticCards();
-});
+    initScrollEngine(); // Added the scroll engine here
+});;
