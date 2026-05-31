@@ -20,7 +20,7 @@ async function runTypewriterSequence() {
         await sleep(300); 
         await typeLine("hero-line-2", "I am Nayan", 50);
         await sleep(350);
-        await typeLine("hero-terminal", "engineering automated systems and scalable web applications.", 50);
+        await typeLine("hero-terminal", "engineering automated systems and scalable web applications.", 30);
         await sleep(200);
         await typeLine("hero-line-3", "View My Architecture", 30);
     } catch (err) {
