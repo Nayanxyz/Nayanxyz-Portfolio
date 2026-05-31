@@ -9,22 +9,35 @@
 <body>
 
     <header id="hero">
-        
         <h1 id="hero-line-1"></h1>
         <h2 id="hero-line-2"></h2>
         
         <div class="terminal-container">
-            <span class="prompt">nayan@root:~$ </span>
+            <span class="prompt">Nayanxyz :~$ </span>
             <span id="hero-terminal"></span>
             <span class="cursor">█</span>
         </div>
+        <h2>View my Architecture</h2>
 
-        <a href="#projects" class="hero-btn">View My Architecture</a>
+        <button id="scroll-down-btn" class="scroll-indicator" aria-label="Scroll to projects">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+        </button>
     </header>
 
     <main>
         <section id="projects">
+            <div id="scroll-hint" class="scroll-hint">
+                <span>More Architecture Below</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+            </div>
             <h2>Featured Architecture</h2>
+            <div id="projects-bottom-anchor" style="height: 1px; width: 100%;"></div>
             
             <div class="tab-navigation">
                 <button class="tab-btn active">Projects</button>
