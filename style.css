@@ -1,12 +1,12 @@
 /* ==========================================
-   1. THE VARIABLES (Clinical Minimalism)
+   1. THE VARIABLES (Dark Systems Aesthetic)
    ========================================== */
 :root {
-    --bg-color: #e3f0ef;        /* Soft, non-fatiguing off-white */
-    --card-bg: #ffffff;         /* Pure white for structural contrast */
-    --text-main: #0f172a;       /* Deep charcoal for high legibility */
-    --text-muted: #092d5e;      /* Clean, secondary gray */
-    --accent-glow: #2563eb;     /* Enterprise Blue - absolute trust and action */
+    --bg-color: #0d1117;        /* GitHub Dark background - deep, matte slate */
+    --card-bg: #161b22;         /* Slightly lighter slate for structural elevation */
+    --text-main: #e6edf3;       /* High legibility off-white for primary text */
+    --text-muted: #7d8590;      /* Technical gray for secondary info */
+    --accent-glow: #2f81f7;     /* High-voltage blue for interactive elements */
 }
 
 /* ==========================================
