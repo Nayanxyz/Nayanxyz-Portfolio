@@ -1,14 +1,17 @@
-/* 1. THE VARIABLES (The Color Palette) */
-/* 1. THE VARIABLES (Clinical Minimalism) */
+/* ==========================================
+   1. THE VARIABLES (Clinical Minimalism)
+   ========================================== */
 :root {
-    --bg-color: #e3f0ef; /* Soft, non-fatiguing off-white */
-    --card-bg: #ffffff; /* Pure white for structural contrast */
-    --text-main: #0f172a; /* Deep charcoal for high legibility */
-    --text-muted: #092d5e; /* Clean, secondary gray */
-    --accent-glow: #2563eb; /* Enterprise Blue - absolute trust and action */
+    --bg-color: #e3f0ef;        /* Soft, non-fatiguing off-white */
+    --card-bg: #ffffff;         /* Pure white for structural contrast */
+    --text-main: #0f172a;       /* Deep charcoal for high legibility */
+    --text-muted: #092d5e;      /* Clean, secondary gray */
+    --accent-glow: #2563eb;     /* Enterprise Blue - absolute trust and action */
 }
 
-/* 2. THE RESET (Cleaning the Canvas) */
+/* ==========================================
+   2. THE RESET & BASE (Cleaning the Canvas)
+   ========================================== */
 * {
     margin: 0;
     padding: 0;
@@ -20,15 +23,18 @@ body {
     background-color: var(--bg-color);
     color: var(--text-main);
     line-height: 1.6;
+    overflow-x: hidden; /* Prevents horizontal scrollbar breaking the layout */
 }
 
-/* 3. THE HERO SECTION (Flexbox) */
+/* ==========================================
+   3. THE HERO SECTION & TERMINAL
+   ========================================== */
 #hero {
-    height: 100vh; /* Takes up 100% of the Viewport Height (the screen) */
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers vertically */
-    align-items: center; /* Centers horizontally */
+    justify-content: center;
+    align-items: center;
     text-align: center;
     padding: 20px;
 }
@@ -45,49 +51,70 @@ body {
     font-weight: 400;
 }
 
-/* 4. THE PROJECT GRID (CSS Grid) */
+/* Terminal Cursor Physics */
+.terminal-container {
+    margin: 20px 0;
+    font-family: monospace; /* Enforces the code aesthetic */
+    font-size: 1.2rem;
+}
+
+.prompt {
+    color: var(--accent-glow);
+    font-weight: bold;
+}
+
+.cursor {
+    animation: blink 1s step-end infinite;
+}
+
+/* ==========================================
+   4. LAYOUT: PROJECT GRID
+   ========================================== */
 #projects {
     padding: 100px 20px;
     max-width: 1200px;
-    margin: 0 auto; /* Centers the whole section on ultra-wide monitors */
+    margin: 0 auto;
+}
+
+#projects h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
 }
 
 #project-grid {
     display: grid;
-    /* This is the magic line. It makes the grid responsive without media queries! */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
-    margin-top: 40px;
 }
 
-/* 5. THE PROJECT CARDS */
+/* ==========================================
+   5. COMPONENTS: CARDS & TAGS
+   ========================================== */
 .project-card {
     background-color: var(--card-bg);
     padding: 30px;
     border-radius: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Very subtle dark border */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02); /* Flat, modern shadow */
-
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    
+    /* Animation initial state */
     opacity: 0; 
     transform: translateY(30px);
-
     transition: transform 0.6s ease-out, opacity 0.6s ease-out, box-shadow 0.3s ease;
 }
 
-/* THE REVEAL STATE (JavaScript will add this class) */
 .project-card.show {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* 6. THE HOVER EFFECT (Simple Animation) */
 .project-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15); /* Blue tinted shadow */
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
     border-color: var(--accent-glow);
 }
 
-/* 7. DYNAMIC JAVASCRIPT ELEMENTS */
 .tech-stack {
     display: flex;
     gap: 10px;
@@ -97,103 +124,50 @@ body {
 }
 
 .tech-tag {
-    background-color: var(--bg-color); /* Matches the main background */
-    color: var(--accent-glow); /* Enterprise blue text */
+    background-color: var(--bg-color);
+    color: var(--accent-glow);
     padding: 4px 10px;
     border-radius: 4px;
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.5px;
-    border: 1px solid rgba(37, 99, 235, 0.2); /* Slight blue border */
-}
-
-.scroll-indicator {
-  background: transparent;
-  border: none;
-  color: #260e0e; /* Note: If your page background is white, this will be invisible */
-  cursor: pointer;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.7;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  margin: 0 auto;
-}
-
-/* This replaces your clunky onMouseEnter/onMouseLeave JS logic */
-.scroll-indicator:hover {
-  opacity: 1;
-  transform: translateY(4px);
+    border: 1px solid rgba(37, 99, 235, 0.2);
 }
 
 /* ==========================================
-   9. THE ARCHITECTURE ACTION BUTTON
+   6. COMPONENTS: NAVIGATION TABS & SLIDER
    ========================================== */
-.repo-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    background-color: transparent;
-    color: var(--text-main);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-    border: 1px solid var(--text-muted);
-    border-radius: 8px; /* Clean, modern structural curve */
-    
-    /* The physics of the interaction */
-    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* THE HOVER INVERSION (How premium UI behaves) */
-.repo-link:hover {
-    background-color: var(--text-main);
-    color: var(--card-bg); /* Inverts the text color */
-    border-color: var(--text-main);
-    transform: translateY(-3px); /* The physical lift */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08); /* The depth shadow */
-}
-
-/* TAB NAVIGATION LAYOUT */
 .tab-navigation {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
-    justify-content: center; /* Centers the buttons */
-    flex-wrap: wrap; /* Allows them to stack on small mobile screens */
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-/* Base Button Styling */
 .tab-btn {
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(9, 45, 94, 0.2); /* Corrected contrast for visibility */
     color: var(--text-muted);
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative; /* Crucial for positioning the glowing dot */
+    position: relative;
 }
 
-/* The Hover Animation */
 .tab-btn:hover {
     color: var(--text-main);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(9, 45, 94, 0.5); /* Corrected contrast */
     transform: translateY(-2px);
 }
 
-/* THE ACTIVE STATE ANIMATION */
-/* When the button has the '.active' class, change its color and border */
 .tab-btn.active {
     color: var(--text-main);
     border-color: var(--text-main);
-    padding-left: 30px; /* Make room for the dot */
+    padding-left: 30px;
 }
 
-/* Engineer the Glowing Dot using CSS, not HTML */
 .tab-btn.active::before {
     content: '';
     position: absolute;
@@ -205,67 +179,21 @@ body {
     border-radius: 50%;
     background-color: var(--accent-glow);
     box-shadow: 0 0 8px var(--accent-glow);
-    animation: pulse 2s infinite; /* Optional: Make the dot throb */
+    animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
-}
-
-/* 8. THE SLIDER GEOMETRY */
 .slider-window {
     width: 100%;
-    overflow: hidden; /* Hides the panels not currently on screen */
+    overflow: hidden;
     padding: 10px 0;
 }
 
 .slider-track {
     display: flex;
-    width: 300%; /* 3 panels = 300% width */
-    /* The physics of the slide: smooth deceleration */
+    width: 300%;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 
 .slider-panel {
-    width: 33.333%; /* Each panel takes up exactly 1/3 of the track */
-    padding: 0 15px; /* Adds breathing room between panels */
-}
-
-/* ==========================================
-   10. CONTEXT-AWARE SCROLL HINT
-   ========================================== */
-.scroll-hint {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: var(--text-main);
-    color: var(--card-bg);
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
-    
-    /* State management */
-    opacity: 0;
-    pointer-events: none; /* Prevents it from blocking clicks */
-    transition: opacity 0.4s ease-out;
-}
-
-/* The active state toggled by JS */
-.scroll-hint.visible {
-    opacity: 1;
-    animation: gentle-bounce 2s infinite;
-}
-
-@keyframes gentle-bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(6px); }
-}
+    width: 33.333%;
+    padding: 0 15px;
