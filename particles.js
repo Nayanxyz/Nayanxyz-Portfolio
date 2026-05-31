@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.vx = (Math.random() - 0.5) * baseSpeed;
             this.vy = (Math.random() - 0.5) * baseSpeed;
             // Enterprise Blue with low opacity
-            this.color = `rgba(37, 99, 235, 0.5)`; 
+            this.color = `rgba(47, 129, 247, 0.6)`; 
         }
 
         draw() {
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Opacity fades as they get further apart
                     const opacity = 1 - (distance / maxDistance);
                     // Muted secondary blue/gray for connections
-                    ctx.strokeStyle = `rgba(9, 45, 94, ${opacity * 0.15})`; 
+                    ctx.strokeStyle = `rgba(9, 45, 94, ${opacity * 0.35})`; 
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
