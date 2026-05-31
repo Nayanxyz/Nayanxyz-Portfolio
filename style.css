@@ -285,7 +285,16 @@ body {
 
 .scroll-hint.visible {
     opacity: 1;
+    pointer-events: auto; /* ALLOWS the user to click it */
+    cursor: pointer;      /* Changes the mouse cursor to a hand */
     animation: gentle-bounce 2s infinite;
+}
+
+/* Added a subtle hover effect so it feels like a real button */
+.scroll-hint.visible:hover {
+    background-color: var(--accent-glow);
+    transform: translateX(-50%) scale(1.05); /* Slight enlargement */
+    animation: none; /* Stops bouncing when they hover over it */
 }
 
 /* ==========================================
