@@ -27,6 +27,20 @@ body {
 }
 
 /* ==========================================
+   2.5 BACKGROUND PHYSICS ENGINE
+   ========================================== */
+#network-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* Pushes it behind all content */
+    pointer-events: none; /* Crucial: Lets clicks pass through it to your buttons */
+    background-color: var(--bg-color);
+}
+
+/* ==========================================
    3. THE HERO SECTION & TERMINAL
    ========================================== */
 #hero {
