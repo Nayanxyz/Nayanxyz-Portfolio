@@ -197,3 +197,98 @@ body {
 .slider-panel {
     width: 33.333%;
     padding: 0 15px;
+}
+
+/* ==========================================
+   7. COMPONENTS: BUTTONS & LINKS
+   ========================================== */
+.repo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border: 1px solid var(--text-muted);
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.repo-link:hover {
+    background-color: var(--text-main);
+    color: var(--card-bg);
+    border-color: var(--text-main);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.scroll-indicator {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin: 40px auto 0;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+    transform: translateY(4px);
+}
+
+/* ==========================================
+   8. CONTEXT-AWARE SCROLL HINT
+   ========================================== */
+.scroll-hint {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--text-main);
+    color: var(--card-bg);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease-out;
+}
+
+.scroll-hint.visible {
+    opacity: 1;
+    animation: gentle-bounce 2s infinite;
+}
+
+/* ==========================================
+   9. KEYFRAMES & PHYSICS ENGINE
+   ========================================== */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+@keyframes gentle-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
