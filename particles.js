@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SYSTEM PARAMETERS ---
     // Adjust these to tune the physics
 
-    const density = 6000; // Decreased from 9000. Creates MORE nodes.
+    const density = 4000; // Decreased from 9000. Creates MORE nodes.
     const maxDistance = 140; // Increased. Draws longer connecting lines.
-    const particleRadius = 2.0; // Slightly larger data points.
-    const baseSpeed = 0.15; // Cut in half. Slower movement implies calculated data flow, not chaos.
+    const particleRadius = 1.5; // Slightly larger data points.
+    const baseSpeed = 5.0; // Cut in half. Slower movement implies calculated data flow, not chaos.
 
     // --- STATE MACHINE ---
     // This allows us to change behavior based on scroll position later
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Opacity fades as they get further apart
                     const opacity = 1 - (distance / maxDistance);
                     // Muted secondary blue/gray for connections
-                    ctx.strokeStyle = `rgba(230, 237, 243, ${opacity * 0.15})`; 
+                    ctx.strokeStyle = `rgba(230, 237, 243, ${opacity * 0.01})`; 
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(particles[i].x, particles[i].y);
