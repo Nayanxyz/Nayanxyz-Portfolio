@@ -176,6 +176,14 @@ function initScrollHint() {
 
     if (!scrollHint || !heroSection || !bottomAnchor) return;
 
+    // THE NEW CLICK LISTENER
+    scrollHint.addEventListener('click', () => {
+        window.scrollBy({ 
+            top: window.innerHeight * 0.7, // Scrolls down exactly 70% of the user's screen height
+            behavior: 'smooth' 
+        });
+    });
+
     const bottomObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
