@@ -257,7 +257,8 @@ const socialLinks = [
         platform: "Email",
         url: "mailto:choudharyji527@gmail.com",
         description: "Direct line for architecture consultations, project inquiries, and professional communication.",
-        tag: "Contact"
+        tag: "Contact",
+        handle: "choudharyji527@gmail.com"
     }
 ];
 
