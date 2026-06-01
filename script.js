@@ -258,7 +258,7 @@ function renderSocialHandles() {
                         <polyline points="7 7 17 7 17 17"></polyline>
                     </svg>
                 </div>
-                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
+                <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
                     ${social.description}
                 </p>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
