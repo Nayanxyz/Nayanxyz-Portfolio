@@ -262,7 +262,7 @@ function renderSocialHandles() {
                     ${social.description}
                 </p>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <span class="tech-tag">${social.tag}</span>
+                    <span class="handle-tag">${social.tag}</span>
                 </div>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                     <span class="tech-tag">${social.handle}</span>
