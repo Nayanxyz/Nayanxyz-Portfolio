@@ -262,7 +262,6 @@ const socialLinks = [
 ];
 
 // 3. THE RENDER LOOP
-// 3. THE RENDER LOOP
 function renderSocialHandles() {
     const socialContainer = document.getElementById('social-grid');
     if (!socialContainer) return;
@@ -289,7 +288,7 @@ function renderSocialHandles() {
 
             // 2. We inject the raw email here, styling it like system text (monospace)
             handleHTML = `
-                <span style="color: var(--text-muted); font-family: monospace; font-size: 0.85rem; letter-spacing: 0.5px;">
+                <span style="color: var(--text-main); font-family: monospace; font-size: 0.85rem; letter-spacing: 0.5px;">
                     ${rawEmail}
                 </span>
             `;
