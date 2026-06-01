@@ -273,7 +273,6 @@ function renderSocialHandles() {
 
     socialContainer.innerHTML = htmlString;
 
-    // Apply the existing Intersection Observer so they fade in beautifully
     const dynamicCards = socialContainer.querySelectorAll('.project-card');
     if (typeof cardObserver !== 'undefined') {
         dynamicCards.forEach(card => cardObserver.observe(card));
