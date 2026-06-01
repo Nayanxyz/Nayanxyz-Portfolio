@@ -204,12 +204,12 @@ body {
 
 .slider-track {
     display: flex;
-    width: 300%;
+    width: 400%;
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 
 .slider-panel {
-    width: 33.333%;
+    width: 25%;
     padding: 0 15px;
 }
 
@@ -314,4 +314,38 @@ body {
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+/* ==========================================
+   10. SOCIAL GRID LAYOUT
+   ========================================== */
+#social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Kills the default blue underline for anchor tags */
+.social-link-card {
+    text-decoration: none !important; 
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure the SVG arrow turns blue on hover to match the border glow */
+.social-link-card:hover .arrow-icon {
+    stroke: var(--accent-glow);
+    transform: translate(2px, -2px);
+    transition: all 0.3s ease;
+}
+
+.arrow-icon {
+    transition: all 0.3s ease;
+}
+
+.social-link-card .handle-tag {
+    color: #ffffff; /* Forces the text to pure white */
+    border-color: rgba(255, 255, 255, 0.3); /* Changes the blue border to a subtle white border */
 }
