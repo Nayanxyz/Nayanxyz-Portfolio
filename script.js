@@ -245,8 +245,10 @@ function renderSocialHandles() {
     let htmlString = '';
     
     socialLinks.forEach(social => {
-        // Notice we are using an <a> tag instead of a <div> for the card
-        // We reuse the 'project-card' class to perfectly mirror the UI
+        // PROTOCOL AWARENESS: 
+        // If it is an email, open in the same window so no blank tab is created.
+        // If it is a standard URL, open in a new tab.
+        const targetAttr = social.url.startsWith('mailto:') ? '' : 'target="_blank"';
         htmlString += `
             <a href="${social.url}" target="_blank" class="project-card social-link-card">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
