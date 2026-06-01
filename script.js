@@ -243,19 +243,19 @@ const socialLinks = [
     },
     {
         platform: "LinkedIn",
-        url: "https://www.linkedin.com/in/your-profile-here",
+        url: "https://www.linkedin.com/in/nayanxyz/",
         description: "Professional experience, network connections, and system engineering discussions.",
         tag: "Network"
     },
     {
         platform: "Instagram",
-        url: "https://instagram.com/your-handle",
+        url: "https://instagram.com/nayan.xyz",
         description: "Visual documentation of my daily workflow, setup, and engineering lifestyle.",
         tag: "Media"
     },
     {
         platform: "Email",
-        url: "mailto:your.email@gmail.com",
+        url: "mailto:choudharyji527@gmail.com",
         description: "Direct line for architecture consultations, project inquiries, and professional communication.",
         tag: "Contact"
     }
