@@ -214,9 +214,6 @@ function initScrollHint() {
 /* ==========================================
    7. THE SOCIAL CONNECTIONS ENGINE
    ========================================== */
-/* ==========================================
-   8. THE SOCIAL CONNECTIONS ENGINE
-   ========================================== */
 
 // 1. THE ICON DICTIONARY
 // Stores clean SVG graphics mapped to platform names
