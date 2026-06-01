@@ -143,7 +143,7 @@ function initTabSlider() {
             tabButtons.forEach(btn => btn.classList.remove('active'));
             this.classList.add('active');
             
-            const slidePercentage = index * -33.333;
+            const slidePercentage = index * -25;
             sliderTrack.style.transform = `translateX(${slidePercentage}%)`;
         });
     });
@@ -210,8 +210,75 @@ function initScrollHint() {
     heroObserver.observe(heroSection);
 }
 
+
 /* ==========================================
-   7. INITIALIZATION CONTROLLER
+   7. THE SOCIAL CONNECTIONS ENGINE
+   ========================================== */
+const socialLinks = [
+    {
+        platform: "GitHub",
+        url: "https://github.com/Nayanxyz",
+        description: "Open-source system architecture, algorithms, and complete project repositories.",
+        tag: "Codebase",
+        handle: "github/Nayanxyz"
+    },
+    {
+        platform: "Instagram",
+        url: "https://www.instagram.com/nayan.xyz",
+        description: "Professional experience, network connections, and system engineering discussions.",
+        tag: "Network",
+        handle: "@nayan.xyz"
+    },
+    {
+        platform: "Email",
+        url: "mailto:choudharyji527@gmail.com",
+        description: "Direct line for architecture consultations, project inquiries, and professional communication.",
+        tag: "Contact",
+        handle: "choudharyji527@gmail.com"
+    }
+];
+
+function renderSocialHandles() {
+    const socialContainer = document.getElementById('social-grid');
+    if (!socialContainer) return;
+
+    let htmlString = '';
+    
+    socialLinks.forEach(social => {
+        // Notice we are using an <a> tag instead of a <div> for the card
+        // We reuse the 'project-card' class to perfectly mirror the UI
+        htmlString += `
+            <a href="${social.url}" target="_blank" class="project-card social-link-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                    <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main);">${social.platform}</h3>
+                    <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </div>
+                <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
+                    ${social.description}
+                </p>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="handle-tag">${social.tag}</span>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="tech-tag">${social.handle}</span>
+                </div>
+            </a>
+        `;
+    });
+
+    socialContainer.innerHTML = htmlString;
+
+    // Apply the existing Intersection Observer so they fade in beautifully
+    const dynamicCards = socialContainer.querySelectorAll('.project-card');
+    if (typeof cardObserver !== 'undefined') {
+        dynamicCards.forEach(card => cardObserver.observe(card));
+    }
+}
+/* ==========================================
+   8. INITIALIZATION CONTROLLER
    ========================================== */
 // This is the ignition switch. It MUST stay at the very bottom.
 document.addEventListener("DOMContentLoaded", () => {
@@ -221,4 +288,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initTabSlider();
     initScrollEngine(); 
     initScrollHint(); 
+    renderSocialHandles();
 });
+
