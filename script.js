@@ -243,7 +243,7 @@ const socialLinks = [
     },
     {
         platform: "LinkedIn",
-        url: "https://www.linkedin.com/in/nayanxyz/",
+        url: "https://www.linkedin.com/in/nayanxyz",
         description: "Professional experience, network connections, and system engineering discussions.",
         tag: "Network"
     },
@@ -311,6 +311,9 @@ function renderSocialHandles() {
                 
                 <div style="display: flex; align-items: center; font-weight: 600; font-size: 0.9rem;">
                     ${actionButtonHTML}
+                </div>
+                <div style="display: flex; align-items: center; font-weight: 600; font-size: 0.9rem;">
+                    ${social.handle}
                 </div>
             </div>
         `;
