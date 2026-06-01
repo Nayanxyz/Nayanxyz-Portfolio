@@ -250,7 +250,7 @@ function renderSocialHandles() {
         // If it is a standard URL, open in a new tab.
         const targetAttr = social.url.startsWith('mailto:') ? '' : 'target="_blank"';
         htmlString += `
-            <a href="${social.url}" target="_blank" class="project-card social-link-card">
+            <a href="${social.url}" ${targetAttr} class="project-card social-link-card">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
                     <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main);">${social.platform}</h3>
                     <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -258,11 +258,11 @@ function renderSocialHandles() {
                         <polyline points="7 7 17 7 17 17"></polyline>
                     </svg>
                 </div>
-                <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
                     ${social.description}
                 </p>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <span class="handle-tag">${social.tag}</span>
+                    <span class="tech-tag">${social.tag}</span>
                 </div>
                 <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                     <span class="tech-tag">${social.handle}</span>
