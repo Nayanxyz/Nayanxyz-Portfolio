@@ -245,29 +245,23 @@ function renderSocialHandles() {
     let htmlString = '';
     
     socialLinks.forEach(social => {
-        // PROTOCOL AWARENESS: 
-        // If it is an email, open in the same window so no blank tab is created.
-        // If it is a standard URL, open in a new tab.
+        // PROTOCOL AWARENESS remains intact
         const targetAttr = social.url.startsWith('mailto:') ? '' : 'target="_blank"';
+
         htmlString += `
-            <a href="${social.url}" ${targetAttr} class="project-card social-link-card">
+            <div class="project-card" style="display: flex; flex-direction: column;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
                     <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main);">${social.platform}</h3>
-                    <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                        <polyline points="7 7 17 7 17 17"></polyline>
-                    </svg>
                 </div>
-                <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">
+                
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 25px; flex-grow: 1;">
                     ${social.description}
                 </p>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <span class="handle-tag">${social.tag}</span>
+                
+                <div style="display: flex; align-items: center; font-weight: 600; font-size: 0.9rem;">
+                    <a href="${social.url}" ${targetAttr} class="repo-link">${social.tag} &rarr;</a>
                 </div>
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <span class="tech-tag">${social.handle}</span>
-                </div>
-            </a>
+            </div>
         `;
     });
 
