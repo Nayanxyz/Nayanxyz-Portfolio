@@ -269,10 +269,31 @@ function renderSocialHandles() {
     let htmlString = '';
     
     socialLinks.forEach(social => {
-        const targetAttr = social.url.startsWith('mailto:') ? '' : 'target="_blank"';
-        
-        // Dynamically pull the correct icon, or use the default if not found
         const platformIcon = iconDictionary[social.platform] || iconDictionary["Default"];
+        let actionButtonHTML = '';
+
+        // PROTOCOL AWARENESS: The Click-to-Copy Engine
+        if (social.platform === "Email") {
+            // Extract the actual email by removing 'mailto:'
+            const rawEmail = social.url.replace('mailto:', '');
+            
+            // Generate a button with an inline Clipboard API trigger and a 2-second reset timer
+            actionButtonHTML = `
+                <button 
+                    onclick="navigator.clipboard.writeText('${rawEmail}'); this.innerHTML='Copied! &check;'; setTimeout(() => this.innerHTML='${social.tag} &rarr;', 2000);" 
+                    class="repo-link repo-link-social" 
+                    style="cursor: pointer; border: 1px solid var(--text-muted); background: transparent;">
+                    ${social.tag} &rarr;
+                </button>
+            `;
+        } else {
+            // Standard Web Links
+            actionButtonHTML = `
+                <a href="${social.url}" target="_blank" class="repo-link repo-link-social">
+                    ${social.tag} &rarr;
+                </a>
+            `;
+        }
 
         htmlString += `
             <div class="project-card" style="display: flex; flex-direction: column;">
@@ -288,7 +309,7 @@ function renderSocialHandles() {
                 </p>
                 
                 <div style="display: flex; align-items: center; font-weight: 600; font-size: 0.9rem;">
-                    <a href="${social.url}" ${targetAttr} class="repo-link repo-link-social">${social.tag} &rarr;</a>
+                    ${actionButtonHTML}
                 </div>
             </div>
         `;
