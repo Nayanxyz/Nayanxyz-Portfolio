@@ -214,10 +214,16 @@ function initScrollHint() {
 /* ==========================================
    7. THE SOCIAL CONNECTIONS ENGINE
    ========================================== */
+/* ==========================================
+   8. THE SOCIAL CONNECTIONS ENGINE
+   ========================================== */
+
 // 1. THE ICON DICTIONARY
 // Stores clean SVG graphics mapped to platform names
 const iconDictionary = {
     "GitHub": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`,
+    
+    "LinkedIn": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
     
     "Instagram": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`,
     
@@ -227,30 +233,35 @@ const iconDictionary = {
     "Default": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`
 };
 
-   const socialLinks = [
+// 2. THE DATA ARRAY
+const socialLinks = [
     {
         platform: "GitHub",
         url: "https://github.com/Nayanxyz",
         description: "Open-source system architecture, algorithms, and complete project repositories.",
-        tag: "Codebase",
-        handle: "github/Nayanxyz"
+        tag: "Codebase"
+    },
+    {
+        platform: "LinkedIn",
+        url: "https://www.linkedin.com/in/your-profile-here",
+        description: "Professional experience, network connections, and system engineering discussions.",
+        tag: "Network"
     },
     {
         platform: "Instagram",
-        url: "https://www.instagram.com/nayan.xyz",
-        description: "Professional experience, network connections, and system engineering discussions.",
-        tag: "Network",
-        handle: "@nayan.xyz"
+        url: "https://instagram.com/your-handle",
+        description: "Visual documentation of my daily workflow, setup, and engineering lifestyle.",
+        tag: "Media"
     },
     {
         platform: "Email",
-        url: "mailto:choudharyji527@gmail.com",
+        url: "mailto:your.email@gmail.com",
         description: "Direct line for architecture consultations, project inquiries, and professional communication.",
-        tag: "Contact",
-        handle: "choudharyji527@gmail.com"
+        tag: "Contact"
     }
 ];
 
+// 3. THE RENDER LOOP
 function renderSocialHandles() {
     const socialContainer = document.getElementById('social-grid');
     if (!socialContainer) return;
@@ -258,13 +269,18 @@ function renderSocialHandles() {
     let htmlString = '';
     
     socialLinks.forEach(social => {
-        // PROTOCOL AWARENESS remains intact
         const targetAttr = social.url.startsWith('mailto:') ? '' : 'target="_blank"';
+        
+        // Dynamically pull the correct icon, or use the default if not found
+        const platformIcon = iconDictionary[social.platform] || iconDictionary["Default"];
 
         htmlString += `
             <div class="project-card" style="display: flex; flex-direction: column;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-                    <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main);">${social.platform}</h3>
+                    <h3 style="font-size: 1.2rem; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 10px;">
+                        <span style="color: var(--text-main);">${platformIcon}</span>
+                        ${social.platform}
+                    </h3>
                 </div>
                 
                 <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 25px; flex-grow: 1;">
@@ -272,7 +288,7 @@ function renderSocialHandles() {
                 </p>
                 
                 <div style="display: flex; align-items: center; font-weight: 600; font-size: 0.9rem;">
-                    <a href="${social.url}" ${targetAttr} class="repo-link">${social.tag} &rarr;</a>
+                    <a href="${social.url}" ${targetAttr} class="repo-link repo-link-social">${social.tag} &rarr;</a>
                 </div>
             </div>
         `;
