@@ -257,11 +257,11 @@ const socialLinks = [
         platform: "Email",
         url: "mailto:choudharyji527@gmail.com",
         description: "Direct line for architecture consultations, project inquiries, and professional communication.",
-        tag: "Contact",
-        handle: "choudharyji527@gmail.com"
+        tag: "Contact"
     }
 ];
 
+// 3. THE RENDER LOOP
 // 3. THE RENDER LOOP
 function renderSocialHandles() {
     const socialContainer = document.getElementById('social-grid');
@@ -272,13 +272,12 @@ function renderSocialHandles() {
     socialLinks.forEach(social => {
         const platformIcon = iconDictionary[social.platform] || iconDictionary["Default"];
         let actionButtonHTML = '';
+        let handleHTML = ''; // 1. Define an empty variable for the handle text
 
-        // PROTOCOL AWARENESS: The Click-to-Copy Engine
+        // PROTOCOL AWARENESS & CONDITIONAL RENDERING
         if (social.platform === "Email") {
-            // Extract the actual email by removing 'mailto:'
-            const rawEmail = social.url.replace('mailto:', '');
+            const rawEmail = social.url.replace('mailto:', ''); // We extract the email dynamically
             
-            // Generate a button with an inline Clipboard API trigger and a 2-second reset timer
             actionButtonHTML = `
                 <button 
                     onclick="navigator.clipboard.writeText('${rawEmail}'); this.innerHTML='Copied! &check;'; setTimeout(() => this.innerHTML='${social.tag} &rarr;', 2000);" 
@@ -287,13 +286,20 @@ function renderSocialHandles() {
                     ${social.tag} &rarr;
                 </button>
             `;
+
+            // 2. We inject the raw email here, styling it like system text (monospace)
+            handleHTML = `
+                <span style="color: var(--text-muted); font-family: monospace; font-size: 0.85rem; letter-spacing: 0.5px;">
+                    ${rawEmail}
+                </span>
+            `;
         } else {
-            // Standard Web Links
             actionButtonHTML = `
                 <a href="${social.url}" target="_blank" class="repo-link repo-link-social">
                     ${social.tag} &rarr;
                 </a>
             `;
+            // handleHTML remains empty for GitHub, LinkedIn, etc.
         }
 
         htmlString += `
@@ -309,11 +315,9 @@ function renderSocialHandles() {
                     ${social.description}
                 </p>
                 
-                <div style="display: flex; align-items: center; font-weight: 600; font-size: 0.9rem;">
+                <div style="display: flex; align-items: center; gap: 15px; font-weight: 600; font-size: 0.9rem; margin-top: auto;">
                     ${actionButtonHTML}
-                </div>
-                <div style="display: flex; align-items: center; font-weight: 600; font-size: 0.9rem;">
-                    ${social.handle}
+                    ${handleHTML}
                 </div>
             </div>
         `;
