@@ -61,6 +61,11 @@ body {
 
 #hero h2 {
     font-size: 1.5rem;
+    color: var(--text-main);
+    font-weight: 400;
+}
+#hero h3 {
+    font-size: 1.1rem;
     color: var(--text-muted);
     font-weight: 400;
 }
