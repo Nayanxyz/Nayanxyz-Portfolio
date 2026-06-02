@@ -150,20 +150,34 @@ function initTabSlider() {
 }
 
 /* ==========================================
-   5. HARDWARE-ACCELERATED SMOOTH SCROLL
+   5. CONSOLE ROUTING ENGINE (Scroll & Slide)
    ========================================== */
-function initScrollEngine() {
-    const scrollBtn = document.getElementById("scroll-down-btn");
-    const targetSection = document.getElementById("projects"); 
+function initConsoleRouting() {
+    const dirCards = document.querySelectorAll('.dir-card');
+    const targetSection = document.getElementById('projects');
+    const tabButtons = document.querySelectorAll('.tab-btn');
 
-    if (scrollBtn && targetSection) {
-        scrollBtn.addEventListener("click", () => {
+    if (dirCards.length === 0 || !targetSection || tabButtons.length === 0) return;
+
+    dirCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // 1. The Scroll Execution
             targetSection.scrollIntoView({ 
                 behavior: "smooth", 
                 block: "start" 
             });
+
+            // 2. The Slider Synchronization
+            // Extracts the number (0, 1, 2, or 3) from the HTML data-target attribute
+            const targetIndex = parseInt(this.getAttribute('data-target'));
+            
+            // Programmatically "clicks" the corresponding hidden tab button
+            // This perfectly reuses your existing slide math without duplicating code
+            if (tabButtons[targetIndex]) {
+                tabButtons[targetIndex].click();
+            }
         });
-    }
+    });
 }
 
 /* ==========================================
