@@ -16,13 +16,13 @@ async function typeLine(elementId, text, speed) {
 
 async function runTypewriterSequence() {
     try {
-        await typeLine("hero-line-1", "Hello everyone!", 50);
+        await typeLine("hero-line-1", "Hello everyone!", 30);
         await sleep(300); 
-        await typeLine("hero-line-2", "I am Nayan", 50);
+        await typeLine("hero-line-2", "I am Nayan", 30);
         await sleep(350);
-        await typeLine("hero-terminal", "engineering automated systems and scalable web applications.", 30);
+        await typeLine("hero-terminal", "engineering automated systems and scalable web applications.", 15);
         await sleep(200);
-        await typeLine("hero-line-3", "View My Architecture", 30);
+        await typeLine("hero-line-3", "View My Architecture", 15);
     } catch (err) {
         console.error("Typewriter error:", err);
     }
@@ -180,9 +180,7 @@ function initConsoleRouting() {
     });
 }
 
-/* ==========================================
-   5. HARDWARE-ACCELERATED SMOOTH SCROLL
-   ========================================== */
+
 function initScrollEngine() {
     const scrollBtn = document.getElementById("scroll-down-btn");
     const targetSection = document.getElementById("projects"); 
