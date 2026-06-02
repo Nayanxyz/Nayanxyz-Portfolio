@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchGitHubProjects();
     observeStaticCards();
     initTabSlider();
-    initScrollEngine(); 
+    initConsoleRouting();
     initScrollHint(); 
     renderSocialHandles();
 });
