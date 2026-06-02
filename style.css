@@ -292,6 +292,25 @@ body {
     color: var(--text-main); /* Text brightens to pure white */
 }
 
+.scroll-indicator {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin: 40px auto 0;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+    transform: translateY(4px);
+}
+
 /* ==========================================
    8. CONTEXT-AWARE SCROLL HINT
    ========================================== */
