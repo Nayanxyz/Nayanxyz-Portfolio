@@ -240,23 +240,56 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-.scroll-indicator {
-    background: transparent;
-    border: none;
-    color: var(--text-main);
-    cursor: pointer;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.7;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    margin: 40px auto 0;
+/* ==========================================
+   THE HERO DIRECTORY (Command Console)
+   ========================================== */
+.hero-directory {
+    display: grid;
+    /* Forces 4 columns on desktop, wraps to 2x2 or 1x4 on smaller screens */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 50px;
+    padding: 0 20px;
 }
 
-.scroll-indicator:hover {
-    opacity: 1;
-    transform: translateY(4px);
+.dir-card {
+    background: transparent;
+    border: 1px solid rgba(230, 237, 243, 0.1); /* Subtle outline */
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    backdrop-filter: blur(5px); /* Gives it a slight glass effect over the particles */
+}
+
+.dir-label {
+    font-family: monospace;
+    color: var(--accent-glow);
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+.dir-title {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+/* The Hover Physics */
+.dir-card:hover {
+    border-color: var(--accent-glow);
+    transform: translateY(-5px);
+    background: rgba(47, 129, 247, 0.05); /* Very faint blue fill */
+}
+
+.dir-card:hover .dir-title {
+    color: var(--text-main); /* Text brightens to pure white */
 }
 
 /* ==========================================
