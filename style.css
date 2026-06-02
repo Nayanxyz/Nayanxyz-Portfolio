@@ -251,9 +251,9 @@ body {
 .hero-directory {
     display: grid;
     /* Forces 4 columns on desktop, wraps to 2x2 or 1x4 on smaller screens */
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
     gap: 15px;
-    width: 100%;
+    width: 60%;
     max-width: 900px;
     margin-top: 50px;
     margin-bottom: 80px;
@@ -263,7 +263,7 @@ body {
 .dir-card {
     background: transparent;
     border: 1px solid rgba(230, 237, 243, 0.1); /* Subtle outline */
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -281,7 +281,8 @@ body {
 }
 
 .dir-title {
-    color: var(--text-muted);
+    align-self: center;
+    color: var(--accent-glow);
     font-size: 1.1rem;
     font-weight: 600;
     transition: color 0.3s ease;
