@@ -5,6 +5,7 @@
     --bg-color: #0d1117;        /* GitHub Dark background - deep, matte slate */
     --card-bg: #161b22;         /* Slightly lighter slate for structural elevation */
     --text-main: #e6edf3;       /* High legibility off-white for primary text */
+    --text-title: #c9d1d9;      /* Subtle off-white for titles and highlights */
     --text-muted: #7d8590;      /* Technical gray for secondary info */
     --accent-glow: #2f81f7;     /* High-voltage blue for interactive elements */
 }
@@ -262,7 +263,7 @@ body {
 
 .dir-card {
     background: transparent;
-    border: 1px solid rgba(230, 237, 243, 0.1); /* Subtle outline */
+    border: 1px solid rgba(250, 250, 251, 0.1); /* Subtle outline */
     border-radius: 12px;
     padding: 20px;
     display: flex;
@@ -273,16 +274,10 @@ body {
     backdrop-filter: blur(5px); /* Gives it a slight glass effect over the particles */
 }
 
-.dir-label {
-    font-family: monospace;
-    color: var(--accent-glow);
-    font-size: 0.8rem;
-    margin-bottom: 5px;
-}
 
 .dir-title {
     align-self: center;
-    color: var(--accent-glow);
+    color: var(--text-title);
     font-size: 1.1rem;
     font-weight: 600;
     transition: color 0.3s ease;
@@ -290,13 +285,13 @@ body {
 
 /* The Hover Physics */
 .dir-card:hover {
-    border-color: var(--accent-glow);
+    border-color: var(--text-main);
     transform: translateY(-5px);
     background: rgba(47, 129, 247, 0.05); /* Very faint blue fill */
 }
 
 .dir-card:hover .dir-title {
-    color: var(--text-main); /* Text brightens to pure white */
+    color: var(--accent-glow); /* Text brightens to pure white */
 }
 
 .scroll-indicator {
