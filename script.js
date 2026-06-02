@@ -181,6 +181,23 @@ function initConsoleRouting() {
 }
 
 /* ==========================================
+   5. HARDWARE-ACCELERATED SMOOTH SCROLL
+   ========================================== */
+function initScrollEngine() {
+    const scrollBtn = document.getElementById("scroll-down-btn");
+    const targetSection = document.getElementById("projects"); 
+
+    if (scrollBtn && targetSection) {
+        scrollBtn.addEventListener("click", () => {
+            targetSection.scrollIntoView({ 
+                behavior: "smooth", 
+                block: "start" 
+            });
+        });
+    }
+}
+
+/* ==========================================
    6. DYNAMIC SCROLL HINT ENGINE
    ========================================== */
 function initScrollHint() {
@@ -350,6 +367,7 @@ document.addEventListener("DOMContentLoaded", () => {
     observeStaticCards();
     initTabSlider();
     initConsoleRouting();
+    initScrollEngine(); 
     initScrollHint(); 
     renderSocialHandles();
 });
