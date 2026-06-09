@@ -60,7 +60,8 @@ const pinnedRepos = [
     "Web-Automation-with-Selenium",
     "Web_scrape_sql",
     "Personality-Ai-Agent",
-    "Django-Application-form"
+    "Django-Application-form",
+    "medicine-scanner-API"
 ];
 
 async function fetchGitHubProjects() {
