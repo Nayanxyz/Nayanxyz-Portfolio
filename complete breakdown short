@@ -9,3 +9,12 @@
 
     class="..." and id="...": Identifiers applied to HTML tags. IDs are unique to a single element; 
                             classes are applied to multiple elements that share the same styling.
+
+    <div class="terminal-container">: A generic structural container used to group the typewriter text elements together.
+
+    data-target="...": A custom attribute created by the developer to store an invisible number (0, 1, 2).
+                    The JavaScript reads this number to know which slider panel to display when a specific button is clicked.
+
+    <svg>: Scalable Vector Graphics. It allows the browser to draw high-quality icons using mathematical
+        coordinates written directly in the HTML, avoiding the need to load external image files.
+
