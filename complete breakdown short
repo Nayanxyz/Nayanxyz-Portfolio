@@ -58,3 +58,16 @@ Note: This file uses zero external libraries. Everything relies on native browse
 
     animate(): A recursive loop function. It wipes the <canvas> completely clean, asks every particle to update its position, redraws the particles, 
             and draws lines between them if they are close enough.
+
+3. CSS Architecture (Styling & Physics)
+
+    :root: A global storage area at the top of the CSS file. It holds custom variables (like --bg-color: #0d1117;). 
+        If the background color needs to change, it only has to be changed here, and the entire site updates automatically.
+
+    * { box-sizing: border-box; }: A universal reset. It forces the browser to include padding and borders in the final width calculation of an element, 
+                                preventing the layout from accidentally breaking or stretching.
+
+    pointer-events: none;: A rule applied to the <canvas>. It makes the canvas physically unclickable, ensuring the user's mouse clicks pass 
+                        straight through the animation to hit the buttons underneath.
+
+    display: flex;: A layout tool that aligns child elements perfectly in a row or column, automatically spacing them out.
