@@ -33,3 +33,28 @@ Note: This file uses zero external libraries. Everything relies on native browse
     requestAnimationFrame(): A high-performance timer that tells the browser to run the physics drawing loop exactly in sync with 
                             the monitor's refresh rate (usually 60 times per second).
 
+    Custom Functions & Definitions:
+
+    sleep(ms): A custom utility function that forces the script to pause execution for a specific number of milliseconds.
+
+    typeLine(elementId, text, speed): An asynchronous function that takes a text string, splits it into individual letters, 
+                                    and injects them into the HTML one by one to fake a typing effect.
+
+    runTypewriterSequence(): The master controller function that organizes the typeLine animations in chronological order using await commands.
+
+    observeStaticCards(): A function that attaches the IntersectionObserver to the project cards. When the cards scroll into view, 
+                        the observer adds a CSS class (show) that triggers the fade-in animation.
+
+    fetchGitHubProjects(): An asynchronous function that contacts the GitHub API, downloads the JSON data, filters out 
+                        the unwanted repositories, converts the remaining data into raw HTML text, and injects that text into the webpage.
+
+    initTabSlider(): A function that listens for clicks on the navigation buttons. When clicked, it calculates a mathematical percentage 
+                    (like -25% or -50%) and shifts the slider track sideways.
+
+    class Node: A blueprint that defines what a "particle" is. It holds the particle's current X/Y coordinates on the screen, its speed, and its color.
+
+    Node.update(): A logic method inside the Node class. It calculates where the particle should move on the next frame, 
+                makes it bounce if it hits the edge of the screen, and pushes it away if the user's mouse gets too close.
+
+    animate(): A recursive loop function. It wipes the <canvas> completely clean, asks every particle to update its position, redraws the particles, 
+            and draws lines between them if they are close enough.
