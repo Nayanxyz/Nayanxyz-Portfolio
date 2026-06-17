@@ -18,3 +18,18 @@
     <svg>: Scalable Vector Graphics. It allows the browser to draw high-quality icons using mathematical
         coordinates written directly in the HTML, avoiding the need to load external image files.
 
+2. JavaScript Engine (Logic & Automation)
+Note: This file uses zero external libraries. Everything relies on native browser APIs (Application Programming Interfaces).
+
+    Native Browser APIs Used:
+
+    Promise: An object that represents a task that will finish at some point in the future. It prevents the code from freezing while waiting for a delay.
+
+    IntersectionObserver: A browser tool that constantly watches specific HTML elements to see if they have entered 
+                        the user's visible screen. It is used here to trigger animations only when the user scrolls down.
+
+    fetch(): A network protocol tool that securely contacts the external GitHub server to ask for the repository data.
+
+    requestAnimationFrame(): A high-performance timer that tells the browser to run the physics drawing loop exactly in sync with 
+                            the monitor's refresh rate (usually 60 times per second).
+
