@@ -71,3 +71,15 @@ Note: This file uses zero external libraries. Everything relies on native browse
                         straight through the animation to hit the buttons underneath.
 
     display: flex;: A layout tool that aligns child elements perfectly in a row or column, automatically spacing them out.
+
+    display: grid;: A layout tool that builds a two-dimensional grid. It is used here to create the 3-column project layout 
+                    that automatically collapses into 1 column on mobile phones.
+
+    transform: translateY(30px);: A spatial positioning rule. It forces the project cards to start 30 pixels lower than their normal position. 
+                                When combined with opacity: 0, it creates the starting state for the slide-up animation.
+
+    transition: all 0.3s ease;: An animation rule that tells the browser to smoothly calculate the difference between states over 0.3 seconds. 
+                                For example, when a button is hovered, this makes the color change fade in rather than snap instantly.
+
+    @keyframes: The blueprint for a continuous CSS animation. It defines the start (0%), middle (50%), and end (100%) states of an effect,
+                such as the glowing cursor blinking.
