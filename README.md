@@ -29,3 +29,14 @@ This is a static client-side application. No build step is required.
    ```
 
 2. **Launch:** Open index.html in any modern web browser or host it directly via GitHub Pages, Vercel, or Netlify.
+
+## ⚙️ Configuration
+To adapt this portfolio for your own use, update the following critical variables in the JavaScript files:
+
+**GitHub Username:** In script.js, modify the API fetch URL: fetch('https://api.github.com/users/YOUR_USERNAME/repos').
+
+**Pinned Repositories:** Update the pinnedRepos array in script.js to strictly match the names of the repositories you want to feature.
+
+**Social Connects:** Update the socialLinks array with your specific platform URLs and handles.
+
+**Physics Tuning:** In animation.js, adjust density, maxDistance, and baseSpeed to alter the behavior of the background network.
