@@ -12,3 +12,10 @@ A high-performance, vanilla JavaScript portfolio engineered with clinical minima
 - **Zero Dependencies:** Built entirely with vanilla HTML, CSS, and JavaScript. No heavy frameworks, no bloated libraries.
 
 
+## 🛠️ Technical Architecture
+
+- **Frontend:** HTML5, CSS3 (Custom Variables, CSS Grid/Flexbox)
+- **Logic:** ES6+ JavaScript (Async/Await, Promises, Intersection Observer API)
+- **Data:** GitHub REST API (`/users/{username}/repos`)
+- **Graphics:** HTML5 Canvas 2D API, Inline SVGs
+
