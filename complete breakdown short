@@ -1,0 +1,11 @@
+1. HTML Architecture (Structure)
+    
+    <!DOCTYPE html>: Declares the document type as HTML5 so the web browser knows how to render the code.
+
+    <meta name="viewport">: Instructs mobile devices to scale the webpage correctly according to the physical screen width.
+
+    <canvas id="network-canvas">: Creates an invisible, empty drawing box on the screen. The JavaScript later takes 
+                                control of this box to draw the moving particles.
+
+    class="..." and id="...": Identifiers applied to HTML tags. IDs are unique to a single element; 
+                            classes are applied to multiple elements that share the same styling.
