@@ -19,3 +19,13 @@ A high-performance, vanilla JavaScript portfolio engineered with clinical minima
 - **Data:** GitHub REST API (`/users/{username}/repos`)
 - **Graphics:** HTML5 Canvas 2D API, Inline SVGs
 
+## 🚀 Deployment & Setup
+
+This is a static client-side application. No build step is required.
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Nayanxyz/nayanxyz-portfolio.git
+   ```
+
+2. **Launch:** Open index.html in any modern web browser or host it directly via GitHub Pages, Vercel, or Netlify.
