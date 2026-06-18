@@ -8,6 +8,7 @@
     --text-title: #c9d1d9;      /* Subtle off-white for titles and highlights */
     --text-muted: #7d8590;      /* Technical gray for secondary info */
     --accent-glow: #2f81f7;     /* High-voltage blue for interactive elements */
+    --white-glow: #d9f2f2;
 }
 
 /* ==========================================
