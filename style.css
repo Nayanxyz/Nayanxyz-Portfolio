@@ -88,9 +88,9 @@ body {
     animation: blink 1s step-end infinite;
 }
 
-/* ==========================================
+/* 
    4. LAYOUT: PROJECT GRID
-   ========================================== */
+*/
 #projects {
     padding: 100px 20px;
     max-width: 1200px;
@@ -109,9 +109,9 @@ body {
     gap: 30px;
 }
 
-/* ==========================================
+/*
    5. COMPONENTS: CARDS & TAGS
-   ========================================== */
+*/
 .project-card {
     background-color: var(--card-bg);
     padding: 30px;
@@ -155,9 +155,9 @@ body {
     border: 1px solid rgba(37, 99, 235, 0.2);
 }
 
-/* ==========================================
+/* 
    6. COMPONENTS: NAVIGATION TABS & SLIDER
-   ========================================== */
+ */
 .tab-navigation {
     display: flex;
     gap: 15px;
@@ -220,9 +220,9 @@ body {
     padding: 0 15px;
 }
 
-/* ==========================================
+/*
    7. COMPONENTS: BUTTONS & LINKS
-   ========================================== */
+*/
 .repo-link {
     display: inline-flex;
     align-items: center;
@@ -247,9 +247,9 @@ body {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* ==========================================
+/* 
    THE HERO DIRECTORY (Command Console)
-   ========================================== */
+*/
 .hero-directory {
     display: grid;
     /* Forces 4 columns on desktop, wraps to 2x2 or 1x4 on smaller screens */
@@ -314,9 +314,9 @@ body {
     transform: translateY(4px);
 }
 
-/* ==========================================
+/* 
    8. CONTEXT-AWARE SCROLL HINT
-   ========================================== */
+*/
 .scroll-hint {
     position: fixed;
     bottom: 30px;
@@ -353,9 +353,9 @@ body {
 }
 
 
-/* ==========================================
+/* 
    9. KEYFRAMES & PHYSICS ENGINE
-   ========================================== */
+ */
 @keyframes pulse {
     0% { opacity: 1; }
     50% { opacity: 0.4; }
