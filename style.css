@@ -1,6 +1,6 @@
-/* ==========================================
+/* 
    1. THE VARIABLES (Dark Systems Aesthetic)
-   ========================================== */
+ */
 :root {
     --bg-color: #0d1117;        /* GitHub Dark background - deep, matte slate */
     --card-bg: #161b22;         /* Slightly lighter slate for structural elevation */
@@ -11,9 +11,9 @@
     --white-glow: #d9f2f2;
 }
 
-/* ==========================================
+/* 
    2. THE RESET & BASE (Cleaning the Canvas)
-   ========================================== */
+  */
 * {
     margin: 0;
     padding: 0;
@@ -28,9 +28,9 @@ body {
     overflow-x: hidden; /* Prevents horizontal scrollbar breaking the layout */
 }
 
-/* ==========================================
+/* 
    2.5 BACKGROUND PHYSICS ENGINE
-   ========================================== */
+*/
 #network-canvas {
     position: fixed;
     top: 0;
@@ -42,9 +42,9 @@ body {
     background-color: var(--bg-color);
 }
 
-/* ==========================================
+/* 
    3. THE HERO SECTION & TERMINAL
-   ========================================== */
+*/
 #hero {
     height: 100vh;
     display: flex;
