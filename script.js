@@ -22,7 +22,7 @@ async function runTypewriterSequence() {
         await sleep(350);
         await typeLine("hero-terminal", "Engineering Automated Systems and Scalable Web Applications.", 15);
         await sleep(200);
-        await typeLine("hero-line-3", "View My Architecture", 15);
+        await typeLine("hero-line-3", "View Architecture", 15);
     } catch (err) {
         console.error("Typewriter error:", err);
     }
