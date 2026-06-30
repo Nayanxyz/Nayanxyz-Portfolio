@@ -55,7 +55,8 @@ function observeStaticCards() {
    3. THE GITHUB API INTEGRATION ENGINE
    ========================================== */
 const pinnedRepos = [
-    "Swarm-API-Super-Agent-Travily", 
+    "Swarm-API-Super-Agent-Travily",
+    "Shik-Shak-UI", 
     "webcam-motion-alert", 
     "Web-Automation-with-Selenium",
     "Web_scrape_sql",
